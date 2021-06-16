@@ -12,6 +12,7 @@
 void render(void);
 void drawRectangle();
 void testingFunc(float*);
+void processInput(GLFWwindow* window);
 
 unsigned int VBO, VBO1, VBO2, VBO3, VBO4;
 unsigned int VAO, VAO1, VAO2, VAO3, VAO4;
@@ -81,6 +82,8 @@ int main() {
 
 	while (!glfwWindowShouldClose(window))
 	{
+        processInput(window);
+
         render();
         ourShader.use();
         // Draw 
@@ -133,4 +136,11 @@ void drawRectangle() {
     //}
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+}
+
+// glfw: user input
+void processInput(GLFWwindow* window)
+{
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
 }
